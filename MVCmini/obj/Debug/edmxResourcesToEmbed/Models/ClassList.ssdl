@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ClassListModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+  <EntityContainer Name="ClassListModelStoreContainer">
+    <EntitySet Name="Classes" EntityType="ClassListModel.Store.Classes" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Presences" EntityType="ClassListModel.Store.Presences" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Students" EntityType="ClassListModel.Store.Students" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK_Presences_Presences" Association="ClassListModel.Store.FK_Presences_Presences">
+      <End Role="Students" EntitySet="Students" />
+      <End Role="Presences" EntitySet="Presences" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Students_Classes" Association="ClassListModel.Store.FK_Students_Classes">
+      <End Role="Classes" EntitySet="Classes" />
+      <End Role="Students" EntitySet="Students" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Classes">
+    <Key>
+      <PropertyRef Name="ClassID" />
+    </Key>
+    <Property Name="ClassID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="ClassName" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="ClassDescription" Type="nvarchar" MaxLength="256" />
+  </EntityType>
+  <EntityType Name="Presences">
+    <Key>
+      <PropertyRef Name="PresenceID" />
+    </Key>
+    <Property Name="PresenceID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="StudentID" Type="int" Nullable="false" />
+    <Property Name="Date" Type="date" Nullable="false" />
+    <Property Name="Value" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Students">
+    <Key>
+      <PropertyRef Name="StudentID" />
+    </Key>
+    <Property Name="StudentID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="ClassID" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="Surname" Type="nvarchar" Nullable="false" MaxLength="100" />
+    <Property Name="mark" Type="int" />
+  </EntityType>
+  <Association Name="FK_Presences_Presences">
+    <End Role="Students" Type="ClassListModel.Store.Students" Multiplicity="1" />
+    <End Role="Presences" Type="ClassListModel.Store.Presences" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Students">
+        <PropertyRef Name="StudentID" />
+      </Principal>
+      <Dependent Role="Presences">
+        <PropertyRef Name="StudentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Students_Classes">
+    <End Role="Classes" Type="ClassListModel.Store.Classes" Multiplicity="1" />
+    <End Role="Students" Type="ClassListModel.Store.Students" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Classes">
+        <PropertyRef Name="ClassID" />
+      </Principal>
+      <Dependent Role="Students">
+        <PropertyRef Name="ClassID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

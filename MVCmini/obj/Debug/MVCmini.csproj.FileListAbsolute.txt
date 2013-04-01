@@ -1,0 +1,7 @@
+C:\Users\infob\Documents\Visual Studio 2010\Projects\MVCmini\MVCmini\bin\MVCmini.dll
+C:\Users\infob\Documents\Visual Studio 2010\Projects\MVCmini\MVCmini\bin\MVCmini.pdb
+C:\Users\infob\Documents\Visual Studio 2010\Projects\MVCmini\MVCmini\bin\EntityFramework.dll
+C:\Users\infob\Documents\Visual Studio 2010\Projects\MVCmini\MVCmini\bin\EntityFramework.xml
+C:\Users\infob\Documents\Visual Studio 2010\Projects\MVCmini\MVCmini\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\infob\Documents\Visual Studio 2010\Projects\MVCmini\MVCmini\obj\Debug\MVCmini.dll
+C:\Users\infob\Documents\Visual Studio 2010\Projects\MVCmini\MVCmini\obj\Debug\MVCmini.pdb

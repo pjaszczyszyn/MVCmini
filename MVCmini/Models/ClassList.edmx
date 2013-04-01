@@ -1,0 +1,204 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="ClassListModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="ClassListModelStoreContainer">
+          <EntitySet Name="Classes" EntityType="ClassListModel.Store.Classes" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Presences" EntityType="ClassListModel.Store.Presences" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Students" EntityType="ClassListModel.Store.Students" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_Presences_Presences" Association="ClassListModel.Store.FK_Presences_Presences">
+            <End Role="Students" EntitySet="Students" />
+            <End Role="Presences" EntitySet="Presences" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Students_Classes" Association="ClassListModel.Store.FK_Students_Classes">
+            <End Role="Classes" EntitySet="Classes" />
+            <End Role="Students" EntitySet="Students" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Classes">
+          <Key>
+            <PropertyRef Name="ClassID" />
+          </Key>
+          <Property Name="ClassID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ClassName" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="ClassDescription" Type="nvarchar" MaxLength="256" />
+        </EntityType>
+        <EntityType Name="Presences">
+          <Key>
+            <PropertyRef Name="PresenceID" />
+          </Key>
+          <Property Name="PresenceID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="StudentID" Type="int" Nullable="false" />
+          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="Value" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Students">
+          <Key>
+            <PropertyRef Name="StudentID" />
+          </Key>
+          <Property Name="StudentID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ClassID" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Surname" Type="nvarchar" Nullable="false" MaxLength="100" />
+          <Property Name="mark" Type="int" />
+        </EntityType>
+        <Association Name="FK_Presences_Presences">
+          <End Role="Students" Type="ClassListModel.Store.Students" Multiplicity="1" />
+          <End Role="Presences" Type="ClassListModel.Store.Presences" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Students">
+              <PropertyRef Name="StudentID" />
+            </Principal>
+            <Dependent Role="Presences">
+              <PropertyRef Name="StudentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Students_Classes">
+          <End Role="Classes" Type="ClassListModel.Store.Classes" Multiplicity="1" />
+          <End Role="Students" Type="ClassListModel.Store.Students" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Classes">
+              <PropertyRef Name="ClassID" />
+            </Principal>
+            <Dependent Role="Students">
+              <PropertyRef Name="ClassID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ClassListModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="ClassListEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Classes" EntityType="ClassListModel.Class" />
+          <EntitySet Name="Presences" EntityType="ClassListModel.Presence" />
+          <EntitySet Name="Students" EntityType="ClassListModel.Student" />
+          <AssociationSet Name="FK_Students_Classes" Association="ClassListModel.FK_Students_Classes">
+            <End Role="Classes" EntitySet="Classes" />
+            <End Role="Students" EntitySet="Students" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Presences_Presences" Association="ClassListModel.FK_Presences_Presences">
+            <End Role="Students" EntitySet="Students" />
+            <End Role="Presences" EntitySet="Presences" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Class">
+          <Key>
+            <PropertyRef Name="ClassID" />
+          </Key>
+          <Property Name="ClassID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClassName" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="ClassDescription" Type="String" MaxLength="256" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Students" Relationship="ClassListModel.FK_Students_Classes" FromRole="Classes" ToRole="Students" />
+        </EntityType>
+        <EntityType Name="Presence">
+          <Key>
+            <PropertyRef Name="PresenceID" />
+          </Key>
+          <Property Name="PresenceID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StudentID" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" />
+          <Property Name="Value" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Student" Relationship="ClassListModel.FK_Presences_Presences" FromRole="Presences" ToRole="Students" />
+        </EntityType>
+        <EntityType Name="Student">
+          <Key>
+            <PropertyRef Name="StudentID" />
+          </Key>
+          <Property Name="StudentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClassID" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Surname" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="mark" Type="Int32" />
+          <NavigationProperty Name="Class" Relationship="ClassListModel.FK_Students_Classes" FromRole="Students" ToRole="Classes" />
+          <NavigationProperty Name="Presences" Relationship="ClassListModel.FK_Presences_Presences" FromRole="Students" ToRole="Presences" />
+        </EntityType>
+        <Association Name="FK_Students_Classes">
+          <End Role="Classes" Type="ClassListModel.Class" Multiplicity="1" />
+          <End Role="Students" Type="ClassListModel.Student" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Classes">
+              <PropertyRef Name="ClassID" />
+            </Principal>
+            <Dependent Role="Students">
+              <PropertyRef Name="ClassID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Presences_Presences">
+          <End Role="Students" Type="ClassListModel.Student" Multiplicity="1" />
+          <End Role="Presences" Type="ClassListModel.Presence" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Students">
+              <PropertyRef Name="StudentID" />
+            </Principal>
+            <Dependent Role="Presences">
+              <PropertyRef Name="StudentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ClassListModelStoreContainer" CdmEntityContainer="ClassListEntities">
+          <EntitySetMapping Name="Classes"><EntityTypeMapping TypeName="ClassListModel.Class"><MappingFragment StoreEntitySet="Classes">
+            <ScalarProperty Name="ClassID" ColumnName="ClassID" />
+            <ScalarProperty Name="ClassName" ColumnName="ClassName" />
+            <ScalarProperty Name="ClassDescription" ColumnName="ClassDescription" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Presences"><EntityTypeMapping TypeName="ClassListModel.Presence"><MappingFragment StoreEntitySet="Presences">
+            <ScalarProperty Name="PresenceID" ColumnName="PresenceID" />
+            <ScalarProperty Name="StudentID" ColumnName="StudentID" />
+            <ScalarProperty Name="Date" ColumnName="Date" />
+            <ScalarProperty Name="Value" ColumnName="Value" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Students"><EntityTypeMapping TypeName="ClassListModel.Student"><MappingFragment StoreEntitySet="Students">
+            <ScalarProperty Name="StudentID" ColumnName="StudentID" />
+            <ScalarProperty Name="ClassID" ColumnName="ClassID" />
+            <ScalarProperty Name="Name" ColumnName="Name" />
+            <ScalarProperty Name="Surname" ColumnName="Surname" />
+            <ScalarProperty Name="mark" ColumnName="mark" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="ClassList">
+        <EntityTypeShape EntityType="ClassListModel.Class" Width="1.5" PointX="0.75" PointY="1.25" Height="1.7879850260416668" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClassListModel.Presence" Width="1.5" PointX="5.25" PointY="1.125" Height="1.9802864583333335" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClassListModel.Student" Width="1.5" PointX="3" PointY="1" Height="2.3648893229166656" IsExpanded="true" />
+        <AssociationConnector Association="ClassListModel.FK_Students_Classes" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.25" PointY="2.1439925130208333" />
+          <ConnectorPoint PointX="3" PointY="2.1439925130208333" />
+        </AssociationConnector>
+        <AssociationConnector Association="ClassListModel.FK_Presences_Presences" ManuallyRouted="false">
+          <ConnectorPoint PointX="4.5" PointY="2.1151432291666667" />
+          <ConnectorPoint PointX="5.25" PointY="2.1151432291666667" />
+        </AssociationConnector>
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>
