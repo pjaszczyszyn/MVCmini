@@ -1,0 +1,45 @@
+﻿@model IEnumerable<MVCmini.Models.Class>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Grupy</h2>
+
+<p>
+    @Html.ActionLink("Stwórz Grupę", "Create")
+</p>
+<table>
+    <tr>
+        <th>
+            ID
+        </th>
+        <th>
+            Nazwa
+        </th>
+        <th>
+            Opis
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ClassID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ClassName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ClassDescription)
+        </td>
+        <td>
+            @Html.ActionLink("Członkowie", "Details", new { id=item.ClassID }) |
+            @Html.ActionLink("Edytuj", "Edit", new { id=item.ClassID }) |
+            @Html.ActionLink("Usuń", "Delete", new { id=item.ClassID })
+        </td>
+    </tr>
+}
+
+</table>

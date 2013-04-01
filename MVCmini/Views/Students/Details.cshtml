@@ -1,0 +1,35 @@
+﻿@model MVCmini.Models.Student
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>Student</legend>
+
+    <div class="display-label">ClassID</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ClassID)
+    </div>
+
+    <div class="display-label">Name</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Name)
+    </div>
+
+    <div class="display-label">Surname</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Surname)
+    </div>
+
+    <div class="display-label">mark</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.mark)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.StudentID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

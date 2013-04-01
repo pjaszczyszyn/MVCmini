@@ -24,7 +24,7 @@ namespace MVCmini
             routes.MapRoute(
                 "Default", // Route name
                 "{controller}/{action}/{id}", // URL with parameters
-                new { controller = "ClassList", action = "Index", id = UrlParameter.Optional } // Parameter defaults
+                new { controller = "Students", action = "Index", id = UrlParameter.Optional } // Parameter defaults
             );
 
         }
