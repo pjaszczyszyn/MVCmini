@@ -3,10 +3,15 @@
   <EntityContainer Name="ClassListModelStoreContainer">
     <EntitySet Name="Classes" EntityType="ClassListModel.Store.Classes" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Presences" EntityType="ClassListModel.Store.Presences" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PreStuRel" EntityType="ClassListModel.Store.PreStuRel" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Students" EntityType="ClassListModel.Store.Students" store:Type="Tables" Schema="dbo" />
-    <AssociationSet Name="FK_Presences_Presences" Association="ClassListModel.Store.FK_Presences_Presences">
-      <End Role="Students" EntitySet="Students" />
+    <AssociationSet Name="FK_PreStuRel_Presences" Association="ClassListModel.Store.FK_PreStuRel_Presences">
       <End Role="Presences" EntitySet="Presences" />
+      <End Role="PreStuRel" EntitySet="PreStuRel" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PreStuRel_Students" Association="ClassListModel.Store.FK_PreStuRel_Students">
+      <End Role="Students" EntitySet="Students" />
+      <End Role="PreStuRel" EntitySet="PreStuRel" />
     </AssociationSet>
     <AssociationSet Name="FK_Students_Classes" Association="ClassListModel.Store.FK_Students_Classes">
       <End Role="Classes" EntitySet="Classes" />
@@ -26,9 +31,17 @@
       <PropertyRef Name="PresenceID" />
     </Key>
     <Property Name="PresenceID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="StudentID" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="50" />
     <Property Name="Date" Type="date" Nullable="false" />
     <Property Name="Value" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PreStuRel">
+    <Key>
+      <PropertyRef Name="PreStuRel" />
+    </Key>
+    <Property Name="PreStuRel" Type="int" Nullable="false" />
+    <Property Name="StudentsID" Type="int" Nullable="false" />
+    <Property Name="PresencesID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
   </EntityType>
   <EntityType Name="Students">
     <Key>
@@ -40,15 +53,27 @@
     <Property Name="Surname" Type="nvarchar" Nullable="false" MaxLength="100" />
     <Property Name="mark" Type="int" />
   </EntityType>
-  <Association Name="FK_Presences_Presences">
+  <Association Name="FK_PreStuRel_Presences">
+    <End Role="Presences" Type="ClassListModel.Store.Presences" Multiplicity="1" />
+    <End Role="PreStuRel" Type="ClassListModel.Store.PreStuRel" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Presences">
+        <PropertyRef Name="PresenceID" />
+      </Principal>
+      <Dependent Role="PreStuRel">
+        <PropertyRef Name="PresencesID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PreStuRel_Students">
     <End Role="Students" Type="ClassListModel.Store.Students" Multiplicity="1" />
-    <End Role="Presences" Type="ClassListModel.Store.Presences" Multiplicity="*" />
+    <End Role="PreStuRel" Type="ClassListModel.Store.PreStuRel" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Students">
         <PropertyRef Name="StudentID" />
       </Principal>
-      <Dependent Role="Presences">
-        <PropertyRef Name="StudentID" />
+      <Dependent Role="PreStuRel">
+        <PropertyRef Name="StudentsID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

@@ -35,6 +35,12 @@ namespace MVCmini.Controllers
             }
         }
 
+        public ActionResult Presences(int id)
+        {
+            var studentPresence = StudentsRepository.GetStudentPresencesVM(id).ToList();
+            return View("Presences", studentPresence);
+
+        }
         //
         // GET: /ClassList/Create
 

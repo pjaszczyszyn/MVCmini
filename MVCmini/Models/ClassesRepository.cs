@@ -8,7 +8,7 @@ namespace MVCmini.Models
 {
     public class ClassesRepository
     {
-        private ClassListEntities entities = new ClassListEntities();
+        private ClassListEntities2 entities = new ClassListEntities2();
         //
         // Query Methods
 

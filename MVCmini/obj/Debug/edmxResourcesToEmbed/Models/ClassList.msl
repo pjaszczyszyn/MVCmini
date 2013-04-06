@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="ClassListModelStoreContainer" CdmEntityContainer="ClassListEntities">
+  <EntityContainerMapping StorageEntityContainer="ClassListModelStoreContainer" CdmEntityContainer="ClassListEntities2">
     <EntitySetMapping Name="Classes">
       <EntityTypeMapping TypeName="ClassListModel.Class">
         <MappingFragment StoreEntitySet="Classes">
@@ -14,9 +14,18 @@
       <EntityTypeMapping TypeName="ClassListModel.Presence">
         <MappingFragment StoreEntitySet="Presences">
           <ScalarProperty Name="PresenceID" ColumnName="PresenceID" />
-          <ScalarProperty Name="StudentID" ColumnName="StudentID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="Date" ColumnName="Date" />
           <ScalarProperty Name="Value" ColumnName="Value" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PreStuRels">
+      <EntityTypeMapping TypeName="ClassListModel.PreStuRel">
+        <MappingFragment StoreEntitySet="PreStuRel">
+          <ScalarProperty Name="PreStuRel1" ColumnName="PreStuRel" />
+          <ScalarProperty Name="StudentsID" ColumnName="StudentsID" />
+          <ScalarProperty Name="PresencesID" ColumnName="PresencesID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

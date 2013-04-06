@@ -19,7 +19,8 @@ using System.Runtime.Serialization;
 #region EDM Relationship Metadata
 
 [assembly: EdmRelationshipAttribute("ClassListModel", "FK_Students_Classes", "Classes", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(MVCmini.Models.Class), "Students", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MVCmini.Models.Student), true)]
-[assembly: EdmRelationshipAttribute("ClassListModel", "FK_Presences_Presences", "Students", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(MVCmini.Models.Student), "Presences", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MVCmini.Models.Presence), true)]
+[assembly: EdmRelationshipAttribute("ClassListModel", "FK_PreStuRel_Presences", "Presences", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(MVCmini.Models.Presence), "PreStuRel", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MVCmini.Models.PreStuRel), true)]
+[assembly: EdmRelationshipAttribute("ClassListModel", "FK_PreStuRel_Students", "Students", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(MVCmini.Models.Student), "PreStuRel", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MVCmini.Models.PreStuRel), true)]
 
 #endregion
 
@@ -30,32 +31,32 @@ namespace MVCmini.Models
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    public partial class ClassListEntities : ObjectContext
+    public partial class ClassListEntities2 : ObjectContext
     {
         #region Constructors
     
         /// <summary>
-        /// Initializes a new ClassListEntities object using the connection string found in the 'ClassListEntities' section of the application configuration file.
+        /// Initializes a new ClassListEntities2 object using the connection string found in the 'ClassListEntities2' section of the application configuration file.
         /// </summary>
-        public ClassListEntities() : base("name=ClassListEntities", "ClassListEntities")
+        public ClassListEntities2() : base("name=ClassListEntities2", "ClassListEntities2")
         {
             this.ContextOptions.LazyLoadingEnabled = true;
             OnContextCreated();
         }
     
         /// <summary>
-        /// Initialize a new ClassListEntities object.
+        /// Initialize a new ClassListEntities2 object.
         /// </summary>
-        public ClassListEntities(string connectionString) : base(connectionString, "ClassListEntities")
+        public ClassListEntities2(string connectionString) : base(connectionString, "ClassListEntities2")
         {
             this.ContextOptions.LazyLoadingEnabled = true;
             OnContextCreated();
         }
     
         /// <summary>
-        /// Initialize a new ClassListEntities object.
+        /// Initialize a new ClassListEntities2 object.
         /// </summary>
-        public ClassListEntities(EntityConnection connection) : base(connection, "ClassListEntities")
+        public ClassListEntities2(EntityConnection connection) : base(connection, "ClassListEntities2")
         {
             this.ContextOptions.LazyLoadingEnabled = true;
             OnContextCreated();
@@ -106,6 +107,22 @@ namespace MVCmini.Models
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
+        public ObjectSet<PreStuRel> PreStuRels
+        {
+            get
+            {
+                if ((_PreStuRels == null))
+                {
+                    _PreStuRels = base.CreateObjectSet<PreStuRel>("PreStuRels");
+                }
+                return _PreStuRels;
+            }
+        }
+        private ObjectSet<PreStuRel> _PreStuRels;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
         public ObjectSet<Student> Students
         {
             get
@@ -136,6 +153,14 @@ namespace MVCmini.Models
         public void AddToPresences(Presence presence)
         {
             base.AddObject("Presences", presence);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the PreStuRels EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToPreStuRels(PreStuRel preStuRel)
+        {
+            base.AddObject("PreStuRels", preStuRel);
         }
     
         /// <summary>
@@ -298,14 +323,14 @@ namespace MVCmini.Models
         /// Create a new Presence object.
         /// </summary>
         /// <param name="presenceID">Initial value of the PresenceID property.</param>
-        /// <param name="studentID">Initial value of the StudentID property.</param>
+        /// <param name="name">Initial value of the Name property.</param>
         /// <param name="date">Initial value of the Date property.</param>
         /// <param name="value">Initial value of the Value property.</param>
-        public static Presence CreatePresence(global::System.Int32 presenceID, global::System.Int32 studentID, global::System.DateTime date, global::System.Int32 value)
+        public static Presence CreatePresence(global::System.Int32 presenceID, global::System.String name, global::System.DateTime date, global::System.Int32 value)
         {
             Presence presence = new Presence();
             presence.PresenceID = presenceID;
-            presence.StudentID = studentID;
+            presence.Name = name;
             presence.Date = date;
             presence.Value = value;
             return presence;
@@ -346,24 +371,24 @@ namespace MVCmini.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Int32 StudentID
+        public global::System.String Name
         {
             get
             {
-                return _StudentID;
+                return _Name;
             }
             set
             {
-                OnStudentIDChanging(value);
-                ReportPropertyChanging("StudentID");
-                _StudentID = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("StudentID");
-                OnStudentIDChanged();
+                OnNameChanging(value);
+                ReportPropertyChanging("Name");
+                _Name = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Name");
+                OnNameChanged();
             }
         }
-        private global::System.Int32 _StudentID;
-        partial void OnStudentIDChanging(global::System.Int32 value);
-        partial void OnStudentIDChanged();
+        private global::System.String _Name;
+        partial void OnNameChanging(global::System.String value);
+        partial void OnNameChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -423,16 +448,186 @@ namespace MVCmini.Models
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("ClassListModel", "FK_Presences_Presences", "Students")]
+        [EdmRelationshipNavigationPropertyAttribute("ClassListModel", "FK_PreStuRel_Presences", "PreStuRel")]
+        public EntityCollection<PreStuRel> PreStuRels
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<PreStuRel>("ClassListModel.FK_PreStuRel_Presences", "PreStuRel");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<PreStuRel>("ClassListModel.FK_PreStuRel_Presences", "PreStuRel", value);
+                }
+            }
+        }
+
+        #endregion
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="ClassListModel", Name="PreStuRel")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class PreStuRel : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new PreStuRel object.
+        /// </summary>
+        /// <param name="preStuRel1">Initial value of the PreStuRel1 property.</param>
+        /// <param name="studentsID">Initial value of the StudentsID property.</param>
+        /// <param name="presencesID">Initial value of the PresencesID property.</param>
+        public static PreStuRel CreatePreStuRel(global::System.Int32 preStuRel1, global::System.Int32 studentsID, global::System.Int32 presencesID)
+        {
+            PreStuRel preStuRel = new PreStuRel();
+            preStuRel.PreStuRel1 = preStuRel1;
+            preStuRel.StudentsID = studentsID;
+            preStuRel.PresencesID = presencesID;
+            return preStuRel;
+        }
+
+        #endregion
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 PreStuRel1
+        {
+            get
+            {
+                return _PreStuRel1;
+            }
+            set
+            {
+                if (_PreStuRel1 != value)
+                {
+                    OnPreStuRel1Changing(value);
+                    ReportPropertyChanging("PreStuRel1");
+                    _PreStuRel1 = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("PreStuRel1");
+                    OnPreStuRel1Changed();
+                }
+            }
+        }
+        private global::System.Int32 _PreStuRel1;
+        partial void OnPreStuRel1Changing(global::System.Int32 value);
+        partial void OnPreStuRel1Changed();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 StudentsID
+        {
+            get
+            {
+                return _StudentsID;
+            }
+            set
+            {
+                OnStudentsIDChanging(value);
+                ReportPropertyChanging("StudentsID");
+                _StudentsID = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("StudentsID");
+                OnStudentsIDChanged();
+            }
+        }
+        private global::System.Int32 _StudentsID;
+        partial void OnStudentsIDChanging(global::System.Int32 value);
+        partial void OnStudentsIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 PresencesID
+        {
+            get
+            {
+                return _PresencesID;
+            }
+            set
+            {
+                OnPresencesIDChanging(value);
+                ReportPropertyChanging("PresencesID");
+                _PresencesID = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("PresencesID");
+                OnPresencesIDChanged();
+            }
+        }
+        private global::System.Int32 _PresencesID;
+        partial void OnPresencesIDChanging(global::System.Int32 value);
+        partial void OnPresencesIDChanged();
+
+        #endregion
+    
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("ClassListModel", "FK_PreStuRel_Presences", "Presences")]
+        public Presence Presence
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Presence>("ClassListModel.FK_PreStuRel_Presences", "Presences").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Presence>("ClassListModel.FK_PreStuRel_Presences", "Presences").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Presence> PresenceReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Presence>("ClassListModel.FK_PreStuRel_Presences", "Presences");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Presence>("ClassListModel.FK_PreStuRel_Presences", "Presences", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("ClassListModel", "FK_PreStuRel_Students", "Students")]
         public Student Student
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Student>("ClassListModel.FK_Presences_Presences", "Students").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Student>("ClassListModel.FK_PreStuRel_Students", "Students").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Student>("ClassListModel.FK_Presences_Presences", "Students").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Student>("ClassListModel.FK_PreStuRel_Students", "Students").Value = value;
             }
         }
         /// <summary>
@@ -444,13 +639,13 @@ namespace MVCmini.Models
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Student>("ClassListModel.FK_Presences_Presences", "Students");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Student>("ClassListModel.FK_PreStuRel_Students", "Students");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Student>("ClassListModel.FK_Presences_Presences", "Students", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Student>("ClassListModel.FK_PreStuRel_Students", "Students", value);
                 }
             }
         }
@@ -659,18 +854,18 @@ namespace MVCmini.Models
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("ClassListModel", "FK_Presences_Presences", "Presences")]
-        public EntityCollection<Presence> Presences
+        [EdmRelationshipNavigationPropertyAttribute("ClassListModel", "FK_PreStuRel_Students", "PreStuRel")]
+        public EntityCollection<PreStuRel> PreStuRels
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Presence>("ClassListModel.FK_Presences_Presences", "Presences");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<PreStuRel>("ClassListModel.FK_PreStuRel_Students", "PreStuRel");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Presence>("ClassListModel.FK_Presences_Presences", "Presences", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<PreStuRel>("ClassListModel.FK_PreStuRel_Students", "PreStuRel", value);
                 }
             }
         }

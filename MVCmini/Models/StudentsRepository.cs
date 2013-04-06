@@ -8,7 +8,7 @@ namespace MVCmini.Models
 {
     public class StudentsRepository
     {
-        private ClassListEntities entities = new ClassListEntities();
+        private ClassListEntities2 entities = new ClassListEntities2();
         //
         // Query Methods
 
@@ -28,6 +28,18 @@ namespace MVCmini.Models
        
         }
 
+        public  IQueryable<StudentPresenceVM> GetStudentPresencesVM(int id)
+        {
+
+            return (from p in entities.Presences
+                    join sp in entities.PreStuRels on p.PresenceID equals sp.PresencesID
+                    join s in entities.Students on sp.StudentsID equals s.StudentID
+                    orderby s.ClassID
+                    where s.StudentID == id
+                    select new StudentPresenceVM() { StudentID = s.StudentID, Date = p.Date, PresenceID = p.PresenceID,StudentName = s.Name, StudentSurname = s.Surname, Value = p.Value  });
+
+        }
+
         public Student GetStudent(int id)
         {
             return entities.Students.FirstOrDefault(d => d.StudentID == id);
@@ -42,9 +54,9 @@ namespace MVCmini.Models
 
         public void DeleteStudent(Student student)
         {
-            foreach (var presence in student.Presences)
+            foreach (var presence in student.PreStuRels)
             {
-                entities.Presences.DeleteObject(presence);
+                entities.PreStuRels.DeleteObject(presence);
             }
             entities.Students.DeleteObject(student);
         }

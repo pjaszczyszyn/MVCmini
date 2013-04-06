@@ -1,16 +1,21 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="ClassListModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
-  <EntityContainer Name="ClassListEntities" annotation:LazyLoadingEnabled="true">
+  <EntityContainer Name="ClassListEntities2" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="Classes" EntityType="ClassListModel.Class" />
     <EntitySet Name="Presences" EntityType="ClassListModel.Presence" />
+    <EntitySet Name="PreStuRels" EntityType="ClassListModel.PreStuRel" />
     <EntitySet Name="Students" EntityType="ClassListModel.Student" />
     <AssociationSet Name="FK_Students_Classes" Association="ClassListModel.FK_Students_Classes">
       <End Role="Classes" EntitySet="Classes" />
       <End Role="Students" EntitySet="Students" />
     </AssociationSet>
-    <AssociationSet Name="FK_Presences_Presences" Association="ClassListModel.FK_Presences_Presences">
-      <End Role="Students" EntitySet="Students" />
+    <AssociationSet Name="FK_PreStuRel_Presences" Association="ClassListModel.FK_PreStuRel_Presences">
       <End Role="Presences" EntitySet="Presences" />
+      <End Role="PreStuRel" EntitySet="PreStuRels" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PreStuRel_Students" Association="ClassListModel.FK_PreStuRel_Students">
+      <End Role="Students" EntitySet="Students" />
+      <End Role="PreStuRel" EntitySet="PreStuRels" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="Class">
@@ -27,10 +32,20 @@
       <PropertyRef Name="PresenceID" />
     </Key>
     <Property Name="PresenceID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="StudentID" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
     <Property Name="Date" Type="DateTime" Nullable="false" />
     <Property Name="Value" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="Student" Relationship="ClassListModel.FK_Presences_Presences" FromRole="Presences" ToRole="Students" />
+    <NavigationProperty Name="PreStuRels" Relationship="ClassListModel.FK_PreStuRel_Presences" FromRole="Presences" ToRole="PreStuRel" />
+  </EntityType>
+  <EntityType Name="PreStuRel">
+    <Key>
+      <PropertyRef Name="PreStuRel1" />
+    </Key>
+    <Property Name="PreStuRel1" Type="Int32" Nullable="false" />
+    <Property Name="StudentsID" Type="Int32" Nullable="false" />
+    <Property Name="PresencesID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <NavigationProperty Name="Presence" Relationship="ClassListModel.FK_PreStuRel_Presences" FromRole="PreStuRel" ToRole="Presences" />
+    <NavigationProperty Name="Student" Relationship="ClassListModel.FK_PreStuRel_Students" FromRole="PreStuRel" ToRole="Students" />
   </EntityType>
   <EntityType Name="Student">
     <Key>
@@ -42,7 +57,7 @@
     <Property Name="Surname" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
     <Property Name="mark" Type="Int32" />
     <NavigationProperty Name="Class" Relationship="ClassListModel.FK_Students_Classes" FromRole="Students" ToRole="Classes" />
-    <NavigationProperty Name="Presences" Relationship="ClassListModel.FK_Presences_Presences" FromRole="Students" ToRole="Presences" />
+    <NavigationProperty Name="PreStuRels" Relationship="ClassListModel.FK_PreStuRel_Students" FromRole="Students" ToRole="PreStuRel" />
   </EntityType>
   <Association Name="FK_Students_Classes">
     <End Role="Classes" Type="ClassListModel.Class" Multiplicity="1" />
@@ -56,15 +71,27 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Presences_Presences">
+  <Association Name="FK_PreStuRel_Presences">
+    <End Role="Presences" Type="ClassListModel.Presence" Multiplicity="1" />
+    <End Role="PreStuRel" Type="ClassListModel.PreStuRel" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Presences">
+        <PropertyRef Name="PresenceID" />
+      </Principal>
+      <Dependent Role="PreStuRel">
+        <PropertyRef Name="PresencesID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PreStuRel_Students">
     <End Role="Students" Type="ClassListModel.Student" Multiplicity="1" />
-    <End Role="Presences" Type="ClassListModel.Presence" Multiplicity="*" />
+    <End Role="PreStuRel" Type="ClassListModel.PreStuRel" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Students">
         <PropertyRef Name="StudentID" />
       </Principal>
-      <Dependent Role="Presences">
-        <PropertyRef Name="StudentID" />
+      <Dependent Role="PreStuRel">
+        <PropertyRef Name="StudentsID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
