@@ -12,6 +12,7 @@ namespace MVCmini.Controllers
         //
         // GET: /Classes/
         ClassesRepository classesRepository = new ClassesRepository();
+        StudentsRepository StudentsRepository = new StudentsRepository();
         public ActionResult Index()
         {
             var classes = classesRepository.GetClasses().ToList();
@@ -128,5 +129,6 @@ namespace MVCmini.Controllers
                 return View();
             }
         }
+
     }
 }

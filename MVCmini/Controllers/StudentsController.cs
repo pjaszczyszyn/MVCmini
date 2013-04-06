@@ -24,7 +24,7 @@ namespace MVCmini.Controllers
 
         public ActionResult Details(int id)
         {
-            StudentsVM student = StudentsRepository.GetStudent(id);
+            StudentsVM student = StudentsRepository.GetStudentVM(id);
             if (student == null)
             {
                 return View("NotFound");
@@ -75,7 +75,7 @@ namespace MVCmini.Controllers
  
         public ActionResult Edit(int id)
         {
-            Student student = StudentsRepository.GetStudent(id);
+            StudentsVM student = StudentsRepository.GetStudentVM(id);
             return View(student);
         }
 
@@ -107,7 +107,7 @@ namespace MVCmini.Controllers
  
         public ActionResult Delete(int id)
         {
-            Student student = StudentsRepository.GetStudent(id);
+            StudentsVM student = StudentsRepository.GetStudentVM(id);
             if (student == null)
                 return View("NotFound");
             else
@@ -137,6 +137,39 @@ namespace MVCmini.Controllers
             }
 
         }
+
+
+        public ActionResult DropStudentClass(int id)
+        {
+            StudentsVM student = StudentsRepository.GetStudentVM(id);
+            return View(student);
+        }
+
+        //
+        // POST: /ClassList/Edit/5
+
+        [HttpPost]
+        public ActionResult DropStudentClass(int id, FormCollection collection)
+        {
+            try
+            {
+                // TODO: Add update logic here
+                Student student = StudentsRepository.GetStudent(id);
+                student.ClassID = 8;
+
+                if (TryUpdateModel(student))
+                {
+                    StudentsRepository.Save();
+                    return RedirectToAction("Details", new { id = student.StudentID });
+                }
+                return View(student);
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
         public ActionResult About()
         {
             return View();

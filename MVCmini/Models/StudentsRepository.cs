@@ -19,7 +19,7 @@ namespace MVCmini.Models
                    select new StudentsVM() {StudentID = s.StudentID,ClassID = s.ClassID, ClassName = s.Class.ClassName, Name = s.Name,Surname = s.Surname, Mark = s.mark};
         }
 
-        public StudentsVM GetStudent(int id)
+        public StudentsVM GetStudentVM(int id)
         {
             return (from s in entities.Students
                    orderby s.Surname
@@ -28,6 +28,11 @@ namespace MVCmini.Models
        
         }
 
+        public Student GetStudent(int id)
+        {
+            return entities.Students.FirstOrDefault(d => d.StudentID == id);
+
+        }
         //
         // Insert/Delete Methods
         public void AddStudent(Student student)

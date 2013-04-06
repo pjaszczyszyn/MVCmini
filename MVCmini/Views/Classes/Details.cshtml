@@ -4,7 +4,7 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Lista Studentów</h2>
 
 <p>
     @Html.ActionLink("Dodaj Studenta", "Create")
@@ -12,7 +12,7 @@
 <table>
     <tr>
         <th>
-            Przedmiot
+            Grupa
         </th>
         <th>
             Imię
@@ -43,7 +43,7 @@
         <td>
             @Html.ActionLink("Szczegóły", "Details", "Students", new { id = item.StudentID }, null) |
             @Html.ActionLink("Edytuj", "Edit", "Students", new { id = item.StudentID }, null) |
-            @Html.ActionLink("Usuń z Grupy", "DeleteStudent", new { id=item.StudentID })
+            @Html.ActionLink("Usuń z Grupy", "DropStudentClass", "Students", new { id = item.StudentID }, null)
         </td>
     </tr>
 }

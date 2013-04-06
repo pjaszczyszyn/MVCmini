@@ -45,5 +45,11 @@ namespace MVCmini.Models
             entities.SaveChanges();
         }
 
+        public void ChangeGroup(int id)
+        {
+
+        }
+
+
     }
 }

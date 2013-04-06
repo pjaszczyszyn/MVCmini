@@ -1,0 +1,48 @@
+﻿@model MVCmini.ViewModel.StudentsVM
+
+@{
+    ViewBag.Title = "DropStudentClass";
+}
+
+<h2>DropStudentClass</h2>
+
+<h3>Jestes pewien, żeby wyrzucić studenta z tej grupy?</h3>
+<fieldset>
+    <legend>StudentsVM</legend>
+
+    <div class="display-label">StudentID</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.StudentID)
+    </div>
+
+    <div class="display-label">ClassID</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ClassID)
+    </div>
+
+    <div class="display-label">Name</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Name)
+    </div>
+
+    <div class="display-label">Surname</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Surname)
+    </div>
+
+    <div class="display-label">Mark</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Mark)
+    </div>
+
+    <div class="display-label">ClassName</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ClassName)
+    </div>
+</fieldset>
+@using (Html.BeginForm()) {
+    <p>
+        <input type="submit" value="Delete" /> |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}

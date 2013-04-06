@@ -1,4 +1,4 @@
-﻿@model MVCmini.Models.Student
+﻿@model MVCmini.ViewModel.StudentsVM
 
 @{
     ViewBag.Title = "Edit";
@@ -41,11 +41,11 @@
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.mark)
+            @Html.LabelFor(model => model.Mark)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.mark)
-            @Html.ValidationMessageFor(model => model.mark)
+            @Html.EditorFor(model => model.Mark)
+            @Html.ValidationMessageFor(model => model.Mark)
         </div>
 
         <p>
