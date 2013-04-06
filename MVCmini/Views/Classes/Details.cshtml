@@ -1,4 +1,4 @@
-﻿@model IEnumerable<MVCmini.Models.Student>
+﻿@model IEnumerable<MVCmini.ViewModel.StudentsVM>
 
 @{
     ViewBag.Title = "Index";
@@ -12,7 +12,7 @@
 <table>
     <tr>
         <th>
-            ID Grupy
+            Przedmiot
         </th>
         <th>
             Imię
@@ -29,7 +29,7 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.ClassID)
+            @Html.DisplayFor(modelItem => item.ClassName)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Name)
@@ -38,7 +38,7 @@
             @Html.DisplayFor(modelItem => item.Surname)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.mark)
+            @Html.DisplayFor(modelItem => item.Mark)
         </td>
         <td>
             @Html.ActionLink("Szczegóły", "Details", "Students", new { id = item.StudentID }, null) |

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using MVCmini.Models;
+using MVCmini.ViewModel;
 
 namespace MVCmini.Controllers
 {
@@ -23,7 +24,7 @@ namespace MVCmini.Controllers
 
         public ActionResult Details(int id)
         {
-            Student student = StudentsRepository.GetStudent(id);
+            StudentsVM student = StudentsRepository.GetStudent(id);
             if (student == null)
             {
                 return View("NotFound");

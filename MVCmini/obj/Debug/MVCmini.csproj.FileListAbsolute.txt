@@ -5,3 +5,10 @@ C:\Users\infob\Documents\Visual Studio 2010\Projects\MVCmini\MVCmini\bin\EntityF
 C:\Users\infob\Documents\Visual Studio 2010\Projects\MVCmini\MVCmini\obj\Debug\ResolveAssemblyReference.cache
 C:\Users\infob\Documents\Visual Studio 2010\Projects\MVCmini\MVCmini\obj\Debug\MVCmini.dll
 C:\Users\infob\Documents\Visual Studio 2010\Projects\MVCmini\MVCmini\obj\Debug\MVCmini.pdb
+C:\Documents and Settings\infob\Moje dokumenty\Visual Studio 2010\Projects\MVCmini\MVCmini\bin\MVCmini.dll
+C:\Documents and Settings\infob\Moje dokumenty\Visual Studio 2010\Projects\MVCmini\MVCmini\bin\MVCmini.pdb
+C:\Documents and Settings\infob\Moje dokumenty\Visual Studio 2010\Projects\MVCmini\MVCmini\bin\EntityFramework.dll
+C:\Documents and Settings\infob\Moje dokumenty\Visual Studio 2010\Projects\MVCmini\MVCmini\bin\EntityFramework.xml
+C:\Documents and Settings\infob\Moje dokumenty\Visual Studio 2010\Projects\MVCmini\MVCmini\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\infob\Moje dokumenty\Visual Studio 2010\Projects\MVCmini\MVCmini\obj\Debug\MVCmini.dll
+C:\Documents and Settings\infob\Moje dokumenty\Visual Studio 2010\Projects\MVCmini\MVCmini\obj\Debug\MVCmini.pdb

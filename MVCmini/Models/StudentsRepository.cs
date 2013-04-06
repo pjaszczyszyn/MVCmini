@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using MVCmini.ViewModel;
 
 namespace MVCmini.Models
 {
@@ -11,15 +12,22 @@ namespace MVCmini.Models
         //
         // Query Methods
 
-        public IQueryable<Student> SelectAllStudents()
+        public IQueryable<StudentsVM> SelectAllStudents()
         {
-            return entities.Students;
+            return from s in entities.Students
+                   orderby s.Surname
+                   select new StudentsVM() {StudentID = s.StudentID,ClassID = s.ClassID, ClassName = s.Class.ClassName, Name = s.Name,Surname = s.Surname, Mark = s.mark};
         }
 
-        public Student GetStudent(int id)
+        public StudentsVM GetStudent(int id)
         {
-            return entities.Students.FirstOrDefault(d => d.StudentID == id);
+            return (from s in entities.Students
+                   orderby s.Surname
+                   where s.StudentID == id
+                    select new StudentsVM() { StudentID = s.StudentID, ClassID = s.ClassID, ClassName = s.Class.ClassName, Name = s.Name, Surname = s.Surname, Mark = s.mark }).FirstOrDefault();
+       
         }
+
         //
         // Insert/Delete Methods
         public void AddStudent(Student student)

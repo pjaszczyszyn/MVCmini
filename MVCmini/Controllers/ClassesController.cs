@@ -34,7 +34,8 @@ namespace MVCmini.Controllers
 
         public ActionResult Create()
         {
-            return View();
+            Class klasa = new Class();
+            return View(klasa);
         } 
 
         //
@@ -46,8 +47,14 @@ namespace MVCmini.Controllers
             try
             {
                 // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
+                Class klasa = new Class();
+                if (TryUpdateModel(klasa))
+                {
+                    classesRepository.AddClass(klasa);
+                    classesRepository.Save();
+                    return RedirectToAction("Details", new { id = klasa.ClassID });
+                }
+                return View(klasa);
             }
             catch
             {
@@ -60,7 +67,9 @@ namespace MVCmini.Controllers
  
         public ActionResult Edit(int id)
         {
-            return View();
+            // TODO: Add insert logic here
+            Class klasa = classesRepository.GetClass(id);
+            return View(klasa);
         }
 
         //
@@ -72,8 +81,13 @@ namespace MVCmini.Controllers
             try
             {
                 // TODO: Add update logic here
- 
-                return RedirectToAction("Index");
+                Class klasa = classesRepository.GetClass(id);
+                if (TryUpdateModel(klasa))
+                {
+                    classesRepository.Save();
+                    return RedirectToAction("Details", new { id = klasa.ClassID });
+                }
+                return View(klasa);
             }
             catch
             {
@@ -86,7 +100,11 @@ namespace MVCmini.Controllers
  
         public ActionResult Delete(int id)
         {
-            return View();
+            Class klasa = classesRepository.GetClass(id);
+            if (klasa == null)
+                return View("NotFound");
+            else
+                return View(klasa);
         }
 
         //
@@ -98,8 +116,12 @@ namespace MVCmini.Controllers
             try
             {
                 // TODO: Add delete logic here
- 
-                return RedirectToAction("Index");
+                Class klasa = classesRepository.GetClass(id);
+                if (klasa == null)
+                    return View("NotFound");
+                classesRepository.DeleteClass(klasa);
+                classesRepository.Save();
+                return View("Deleted");
             }
             catch
             {

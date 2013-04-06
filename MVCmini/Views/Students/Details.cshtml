@@ -1,4 +1,4 @@
-﻿@model MVCmini.Models.Student
+﻿@model MVCmini.ViewModel.StudentsVM
 
 @{
     ViewBag.Title = "Details";
@@ -9,9 +9,9 @@
 <fieldset>
     <legend>Student</legend>
 
-    <div class="display-label">ClassID</div>
+    <div class="display-label">Przedmiot</div>
     <div class="display-field">
-        @Html.DisplayFor(model => model.ClassID)
+        @Html.DisplayFor(model => model.ClassName)
     </div>
 
     <div class="display-label">Name</div>
