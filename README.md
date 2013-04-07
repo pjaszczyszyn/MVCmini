@@ -30,5 +30,5 @@ przykład:
 ```
 	[Required(ErrorMessage = "Title is required")]
 	[StringLength(50, ErrorMessage = "Title may not be longer than 50 characters")]
-	public string Title { get; set; }'
+	public string Title { get; set; }
 ```
