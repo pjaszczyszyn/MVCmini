@@ -13,10 +13,10 @@ SQL Server 2008 express
 C#
 
 #Co zrobić aby stworzyć pierwszą aplikację?
-Otwieramy Microsoft Visual Web Developer 2010 Express
-klikamy "New Project"
-wybieramy Visual C# -> Web -> ASP.NET MVC 3 Web Application
-klikamy "start"(F5) i gotowe! Pierwsza aplikacja została uruchomiona!
+	Otwieramy Microsoft Visual Web Developer 2010 Express
+	klikamy "New Project"
+	wybieramy Visual C# -> Web -> ASP.NET MVC 3 Web Application
+	klikamy "start"(F5) i gotowe! Pierwsza aplikacja została uruchomiona!
 
 #Kilka zalet...
 - tworzy logiczną strukturę katalogów
