@@ -24,7 +24,7 @@
 - tworzy logiczną strukturę katalogów
 - możemy stworzyć projekt na podstawie przykładowej aplikacji (ASP.NET MVC 3 Web Application)
 - W kontrolerze jednym kliknięciem możemy stworzyć widok na podstawie modelu(szczegóły, edytuj, lista, dodaj, usuń)... a nawet tzw. widoku modelu
-- łatwa walidacja dzięki jquery i klasom częściowym tj. wpisanie zaledwie 3 linijek: nazwy zmiennej, wiadomości przy wymagalności pola, maksymalnej długości pola
+- łatwa walidacja dzięki jquery i klasie częściowej tj. wpisanie zaledwie 3 linijek: nazwy zmiennej, wiadomości przy wymagalności pola, maksymalnej długości pola
 
 przykład:
 ```
