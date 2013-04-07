@@ -77,14 +77,6 @@ namespace MVCmini.Controllers
             }
         }
 
-        public ActionResult AddPresence(int studentID)
-        {
-            StudentsVM student = studentsRepository.GetStudentVM(studentID);
-            if (student == null)
-                return View("NotFound");
-            else
-                return View(new AddPreStuRelVM(studentID));
-        }
 
         [HttpPost]
         public ActionResult AddPresence(FormCollection collection)
