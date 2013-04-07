@@ -39,7 +39,7 @@
     <Key>
       <PropertyRef Name="PreStuRel" />
     </Key>
-    <Property Name="PreStuRel" Type="int" Nullable="false" />
+    <Property Name="PreStuRel" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="StudentsID" Type="int" Nullable="false" />
     <Property Name="PresencesID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
   </EntityType>

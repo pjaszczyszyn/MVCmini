@@ -1,0 +1,43 @@
+﻿@model MVCmini.ViewModel.AddPreStuRelVM
+
+@{
+    ViewBag.Title = "AddPresence";
+}
+
+<h2>AddPresence</h2>
+
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend>PreStuRel</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.preStuRel.StudentsID)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.preStuRel.StudentsID)
+            @Html.ValidationMessageFor(model => model.preStuRel.StudentsID)
+            @Html.DropDownListFor(model => model.preStuRel.StudentsID,
+   new SelectList(model.stuNamesList, "StudentID", "Surname"))
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.preStuRel.PresencesID)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.preStuRel.PresencesID)
+            @Html.ValidationMessageFor(model => model.preStuRel.PresencesID)
+        </div>
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

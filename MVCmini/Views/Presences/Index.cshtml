@@ -35,6 +35,7 @@
             @Html.DisplayFor(modelItem => item.Value)
         </td>
         <td>
+            @Html.ActionLink("Lista", "PresencesList", new { id=item.PresenceID }) |
             @Html.ActionLink("Edit", "Edit", new { id=item.PresenceID }) |
             @Html.ActionLink("Details", "Details", new { id=item.PresenceID }) |
             @Html.ActionLink("Delete", "Delete", new { id=item.PresenceID })

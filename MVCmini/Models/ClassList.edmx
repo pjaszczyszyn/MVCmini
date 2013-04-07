@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="ClassListModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+    <Schema Namespace="ClassListModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
         <EntityContainer Name="ClassListModelStoreContainer">
           <EntitySet Name="Classes" EntityType="ClassListModel.Store.Classes" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Presences" EntityType="ClassListModel.Store.Presences" store:Type="Tables" Schema="dbo" />
@@ -44,7 +44,7 @@
           <Key>
             <PropertyRef Name="PreStuRel" />
           </Key>
-          <Property Name="PreStuRel" Type="int" Nullable="false" />
+          <Property Name="PreStuRel" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="StudentsID" Type="int" Nullable="false" />
           <Property Name="PresencesID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
         </EntityType>
@@ -94,8 +94,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="ClassListModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
@@ -140,7 +139,7 @@
           <Key>
             <PropertyRef Name="PreStuRel1" />
           </Key>
-          <Property Name="PreStuRel1" Type="Int32" Nullable="false" />
+          <Property Name="PreStuRel1" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="StudentsID" Type="Int32" Nullable="false" />
           <Property Name="PresencesID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <NavigationProperty Name="Presence" Relationship="ClassListModel.FK_PreStuRel_Presences" FromRole="PreStuRel" ToRole="Presences" />
@@ -237,7 +236,7 @@
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
       </DesignerInfoPropertySet>
     </Options>

@@ -41,7 +41,7 @@
     <Key>
       <PropertyRef Name="PreStuRel1" />
     </Key>
-    <Property Name="PreStuRel1" Type="Int32" Nullable="false" />
+    <Property Name="PreStuRel1" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="StudentsID" Type="Int32" Nullable="false" />
     <Property Name="PresencesID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <NavigationProperty Name="Presence" Relationship="ClassListModel.FK_PreStuRel_Presences" FromRole="PreStuRel" ToRole="Presences" />

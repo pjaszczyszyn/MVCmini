@@ -25,6 +25,18 @@ namespace MVCmini.Models
                    select new PresencesVM() {Date = g.Key };
         }
 
+        public IQueryable<StudentPresenceVM> GetStudentPresencesVMList(int id)
+        {
+
+            return (from p in entities.Presences
+                    join sp in entities.PreStuRels on p.PresenceID equals sp.PresencesID
+                    join s in entities.Students on sp.StudentsID equals s.StudentID
+                    orderby p.Date
+                    where p.PresenceID == id
+                    select new StudentPresenceVM() { StudentID = s.StudentID, Date = p.Date, PresenceID = p.PresenceID, StudentName = s.Name, StudentSurname = s.Surname, Value = p.Value });
+
+        }
+
         public Presence GetPresence(int id)
         {
             return entities.Presences.FirstOrDefault(d => d.PresenceID == id);

@@ -15,7 +15,7 @@ namespace MVCmini.Models
         public IQueryable<StudentsVM> SelectAllStudents()
         {
             return from s in entities.Students
-                   orderby s.Surname
+                   orderby s.Class.ClassName,s.Surname,s.Name
                    select new StudentsVM() {StudentID = s.StudentID,ClassID = s.ClassID, ClassName = s.Class.ClassName, Name = s.Name,Surname = s.Surname, Mark = s.mark};
         }
 

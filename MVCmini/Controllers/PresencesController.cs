@@ -28,6 +28,13 @@ namespace MVCmini.Controllers
             return View();
         }
 
+        public ActionResult PresencesList(int id)
+        {
+            var studentPresencesList = presencesRepository.GetStudentPresencesVMList(id).ToList();
+            return View("PresencesList", studentPresencesList);
+
+        }
+
         //
         // GET: /Presences/Create
 
