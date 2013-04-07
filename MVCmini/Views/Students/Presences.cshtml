@@ -6,9 +6,6 @@
 
 <h2>Presences</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 <table>
     <tr>
         <th>
@@ -22,9 +19,6 @@
         </th>
         <th>
             Nazwisko
-        </th>
-        <th>
-            Opcje
         </th>
         <th></th>
     </tr>
@@ -43,11 +37,7 @@
         <td>
             @Html.DisplayFor(modelItem => item.StudentSurname)
         </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-        </td>
+
     </tr>
 }
 

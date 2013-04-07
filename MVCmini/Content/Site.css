@@ -1,10 +1,10 @@
 ﻿/*----------------------------------------------------------
-The base color for this template is #990099. If you'd like
+The base color for this template is #292929. If you'd like
 to use a different color start by replacing all instances of
-#990099 with your new color.
+#292929 with your new color.
 ----------------------------------------------------------*/
 body {
-    background-color: #990099;
+    background-color: #292929;
     font-size: .85em;
     font-family: "Trebuchet MS", Verdana, Helvetica, Sans-Serif;
     margin: 0;
@@ -125,7 +125,7 @@ footer,
 /* TAB MENU   
 ----------------------------------------------------------*/
 ul#menu {
-    border-bottom: 1px #990099 solid;
+    border-bottom: 1px #292929 solid;
     padding: 0 0 2px;
     position: relative;
     margin: 0;
