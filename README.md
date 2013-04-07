@@ -10,7 +10,7 @@ http://mvcmini.apphb.com/
 	SQL Server 2008 express
 
 #Język programowania:
-C#
+	C#
 
 #Co zrobić aby stworzyć pierwszą aplikację?
 	Otwieramy Microsoft Visual Web Developer 2010 Express
@@ -24,7 +24,7 @@ C#
 - W kontrolerze jednym kliknięciem możemy stworzyć widok na podstawie modelu(szczegóły, edytuj, lista, dodaj, usuń)... a nawet tzw. widoku modelu
 - łatwa walidacja dzięki jquery i klasom częściowym tj. wpisanie zaledwie 3 linijek: nazwy zmiennej, wiadomości przy wymagalności pola, maksymalnej długości pola
 
-przykład:
+	przykład:
 	[Required(ErrorMessage = “Title is required”)]
 	[StringLength(50, ErrorMessage = “Title may not be longer than 50 characters”)]
 	public string Title { get; set; }
