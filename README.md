@@ -24,7 +24,7 @@ http://mvcmini.apphb.com/
 - W kontrolerze jednym kliknięciem możemy stworzyć widok na podstawie modelu(szczegóły, edytuj, lista, dodaj, usuń)... a nawet tzw. widoku modelu
 - łatwa walidacja dzięki jquery i klasom częściowym tj. wpisanie zaledwie 3 linijek: nazwy zmiennej, wiadomości przy wymagalności pola, maksymalnej długości pola
 
-	przykład:
-	'[Required(ErrorMessage = "Title is required")]
+przykład:
+	[Required(ErrorMessage = "Title is required")]
 	[StringLength(50, ErrorMessage = "Title may not be longer than 50 characters")]
 	public string Title { get; set; }'
